@@ -54,7 +54,7 @@ def featured_image(browser):
 
     # Find "More Info" Button and Click It
     browser.is_element_present_by_text("more info", wait_time=1)
-    more_info_button = browser.links.find_by_partial_text("more info")
+    more_info_button = browser.find_link_by_partial_text("more info")
     more_info_button.click()
 
     # Parse Results HTML with BeautifulSoup
@@ -79,16 +79,17 @@ def twitter_weather(browser):
     mars_weather_soup = bs(html, "lxml")
 
     # Find a Tweet that shows `Mars Weather`
-    mars_weather_tweet = mars_weather_soup.find("div", attrs={
+    mars_weather_tweets = mars_weather_soup.find_all("div", attrs={
                                                 "data-testid": "tweet"
                                                     })
-    
-    mars_weather = mars_weather_tweet.find_all("span")
-    #mars_weather = mars_weather_tweet.find("p", "tweet-text").get_text()
-    weather_results = "nothing found"
-    for span in mars_weather:    
-        if "sol" in span.text:
-            weather_results = span.text
+
+    weather_reports = []
+    for tweet in mars_weather_tweets:
+        for span in tweet.find_all('span'):    
+            if "sol" in span.text:
+                weather_reports.append(span.text)
+                
+    weather_results = weather_reports[0]                        
     print(weather_results)       
     return weather_results
             
@@ -147,6 +148,7 @@ def scrape_hemishere(html_text):
         "img_url": sample_tag
     }
     return hemisphere
+
 
 # Scrape All
 def scrape_all():
