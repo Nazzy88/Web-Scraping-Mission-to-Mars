@@ -1,5 +1,16 @@
-# Web-Scraping-Mission-to-Mars
+# Web Scraping Mission to Mars
  Build a Web Application that Scrapes Various Websites for Data Related to the Mission to Mars and Displays the Information in a Single HTML Page
+
+## Technologies
+* MongoDB
+* Flask
+* HTML
+* PyMongo
+* BeautifulSoup
+* Splinter
+* Python
+* Pandas
+
 
 ## Step 1 - Scraping
 
